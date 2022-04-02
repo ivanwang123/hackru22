@@ -1,29 +1,35 @@
 import { useState } from "react";
 
-function CreateSlider() {
+type Props = {
+  setGoals: any;
+};
+
+function CreateSlider({ setGoals }: Props) {
   const [open, setOpen] = useState<boolean>(false);
 
   const [title, setTitle] = useState<string>("");
-  const [goal, setGoal] = useState<string>("1");
+  const [range, setRange] = useState<string>("1");
 
   const handleSubmit = async () => {
     if (title.length > 0) {
       try {
-        const user = await fetch("http://localhost:8080/goals/create", {
+        const goalRes: any = await fetch("http://localhost:8080/goals/create", {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            title: "Calories",
+            title: title,
             icon: "icon",
-            range: 10,
+            range: parseInt(range),
             value: 0,
-            user_id: "169dc3b3-64f2-4d68-bf58-a26639afc0a7",
+            user_id: localStorage.getItem("userId"),
           }),
         });
-        console.log("USER", user);
+        const goal = await goalRes.json();
+        console.log("GOAL", goal);
+        setGoals((goals: any[]) => [...goals, goal]);
       } catch (e) {
         console.error("ERROR", e);
       }
@@ -33,7 +39,11 @@ function CreateSlider() {
 
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)}>
+      <button
+        type="button"
+        className="border rounded-full"
+        onClick={() => setOpen(true)}
+      >
         +
       </button>
       {open && (
@@ -63,8 +73,8 @@ function CreateSlider() {
               type="number"
               className="w-full border px-2 focus:outline-none"
               placeholder="Goal"
-              value={goal}
-              onChange={(e) => setGoal(e.target.value)}
+              value={range}
+              onChange={(e) => setRange(e.target.value)}
               min={0}
             ></input>
             <button type="submit" onClick={handleSubmit}>
