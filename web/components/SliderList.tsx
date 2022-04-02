@@ -18,7 +18,7 @@ function SliderList({ goals: defaultGoals }: Props) {
           value={goal.value}
         />
       ))}
-      <CreateSlider />
+      <CreateSlider setGoals={setGoals} />
     </div>
   );
 }
