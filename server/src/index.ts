@@ -33,12 +33,9 @@ const main = async () => {
   });
 
   app.post("/user/create", async (req, res) => {
-    console.log("REQ BODY", req.body);
     const user = await prisma.users.create({
       data: {
-        email: req.body.email,
-        password: req.body.password,
-        name: req.body.name,
+        ...req.body,
       },
     });
     console.log("USER", user);
