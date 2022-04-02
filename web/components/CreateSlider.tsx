@@ -33,8 +33,8 @@ function CreateSlider() {
 
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)}>
-        +
+      <button type="button" className="btn btn-red btn-red:hover" onClick={() => setOpen(true)}>
+        + Create Health Goal
       </button>
       {open && (
         <div
