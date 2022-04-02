@@ -9,16 +9,18 @@ function CreateSlider() {
   const handleSubmit = async () => {
     if (title.length > 0) {
       try {
-        const user = await fetch("http://localhost:8080/user/create", {
+        const user = await fetch("http://localhost:8080/goals/create", {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: "test@test.com",
-            password: "password",
-            name: "test",
+            title: "Calories",
+            icon: "icon",
+            range: 10,
+            value: 0,
+            user_id: "169dc3b3-64f2-4d68-bf58-a26639afc0a7",
           }),
         });
         console.log("USER", user);

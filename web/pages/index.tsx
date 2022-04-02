@@ -2,13 +2,13 @@ import { GetServerSideProps } from "next";
 import SliderList from "../components/SliderList";
 import Layout from "../components/Layout";
 
-function Home({ data }: any) {
-  console.log("DATA", data);
+function Home({ goals }: any) {
+  console.log("GOALS", goals);
   return (
     <Layout>
       <main className="grid grid-cols-3">
         <section className="p-6">
-          <SliderList />
+          <SliderList goals={goals} />
         </section>
         <section className="p-6">
           <h1>WellBean</h1>
@@ -23,12 +23,14 @@ function Home({ data }: any) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  // const res = await fetch("http://localhost:8080");
-  // const data = await res.json();
+  const goalsRes = await fetch(
+    "http://localhost:8080/goals/169dc3b3-64f2-4d68-bf58-a26639afc0a7"
+  );
+  const goals = await goalsRes.json();
 
-  // return {
-  //   props: { data },
-  // };
+  return {
+    props: { goals },
+  };
   return {
     props: {},
   };

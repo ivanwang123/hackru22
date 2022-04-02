@@ -1,12 +1,23 @@
+import { useState } from "react";
 import CreateSlider from "./CreateSlider";
 import SliderWrapper from "./SliderWrapper";
 
-function SliderList() {
+type Props = {
+  goals: any[];
+};
+
+function SliderList({ goals: defaultGoals }: Props) {
+  const [goals, setGoals] = useState<any[]>(defaultGoals);
+
   return (
     <div className="grid grid-flow-row gap-4">
-      <SliderWrapper title="Water" range={8} value={2} />
-      <SliderWrapper title="Water" range={8} value={2} />
-      <SliderWrapper title="Water" range={8} value={2} />
+      {goals.map((goal) => (
+        <SliderWrapper
+          title={goal.title}
+          range={goal.range}
+          value={goal.value}
+        />
+      ))}
       <CreateSlider />
     </div>
   );
