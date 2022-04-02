@@ -14,14 +14,6 @@ const main = async () => {
   );
   app.use(bodyParser.json());
 
-  await prisma.users.create({
-    data: {
-      email: "test@test.com",
-      password: "password",
-      name: "test",
-    },
-  });
-
   app.use(
     cors({
       origin: "http://localhost:3000",
@@ -35,7 +27,7 @@ const main = async () => {
 
   app.get("/user/:id", async (req, res) => {
     const user = await prisma.users.findUnique({
-      where: { id: parseInt(req.params.id) },
+      where: { id: req.params.id },
     });
     res.send(JSON.stringify(user));
   });
@@ -56,7 +48,7 @@ const main = async () => {
   app.post("/user/update/:id", async (req, _res) => {
     await prisma.users.update({
       where: {
-        id: parseInt(req.params.id),
+        id: req.params.id,
       },
       data: {
         ...req.body,
@@ -67,7 +59,7 @@ const main = async () => {
   app.get("/goals/:userId", async (req, res) => {
     const goals = await prisma.goals.findMany({
       where: {
-        user_id: parseInt(req.params.userId),
+        user_id: req.params.userId,
       },
     });
     res.send(JSON.stringify(goals));
@@ -85,7 +77,7 @@ const main = async () => {
   app.post("/goals/update/:id", async (req, _res) => {
     await prisma.goals.update({
       where: {
-        id: parseInt(req.params.id),
+        id: req.params.id,
       },
       data: {
         ...req.body,
