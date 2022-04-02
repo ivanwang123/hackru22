@@ -12,7 +12,7 @@ function Home({ data }: any) {
         </section>
         <section className="p-6">
           <h1>WellBean</h1>
-          <img src="happy.GIF" alt="happy bean" />
+          <img src="Happy.GIF" alt="happy bean" />
         </section>
         <section className="p-6">
           <h2>TODO</h2>
