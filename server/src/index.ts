@@ -25,9 +25,12 @@ const main = async () => {
     res.send(JSON.stringify("Hello world!"));
   });
 
-  app.get("/user/:id", async (req, res) => {
-    const user = await prisma.users.findUnique({
-      where: { id: req.params.id },
+  app.post("/user", async (req, res) => {
+    const user = await prisma.users.findFirst({
+      where: {
+        email: req.body.email,
+        password: req.body.password,
+      },
     });
     res.send(JSON.stringify(user));
   });
@@ -57,6 +60,9 @@ const main = async () => {
     const goals = await prisma.goals.findMany({
       where: {
         user_id: req.params.userId,
+      },
+      orderBy: {
+        created_at: "asc",
       },
     });
     res.send(JSON.stringify(goals));

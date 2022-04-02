@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateSlider from "./CreateSlider";
 import SliderWrapper from "./SliderWrapper";
 
-type Props = {
-  goals: any[];
-};
+function SliderList() {
+  const [goals, setGoals] = useState<any[]>([]);
 
-function SliderList({ goals: defaultGoals }: Props) {
-  const [goals, setGoals] = useState<any[]>(defaultGoals);
+  useEffect(() => {
+    (async () => {
+      const goalsRes = await fetch(
+        `http://localhost:8080/goals/${localStorage.getItem("userId")}`
+      );
+      const goals = await goalsRes.json();
+      setGoals(goals);
+    })();
+  }, []);
 
   return (
     <div className="grid grid-flow-row gap-4">

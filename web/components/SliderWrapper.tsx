@@ -22,7 +22,7 @@ function SliderWrapper({ title, range, value: defaultValue }: Props) {
       <div className="flex items-center">
         <Drop className="w-6 h-6 mr-1" />
         <Slider range={range} value={value} onChange={onChange} />
-        <p className="w-12 ml-1">
+        <p className="w-20 ml-1">
           {value}/{range}
         </p>
       </div>
