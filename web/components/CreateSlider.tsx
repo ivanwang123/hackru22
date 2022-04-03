@@ -41,10 +41,10 @@ function CreateSlider({ setGoals }: Props) {
     <>
       <button
         type="button"
-        className="border rounded-full"
+        className="btn btn-red btn-red:hover"
         onClick={() => setOpen(true)}
       >
-        +
+        + Create Health Goal
       </button>
       {open && (
         <div
