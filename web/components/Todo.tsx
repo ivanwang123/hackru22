@@ -35,14 +35,16 @@ function Todo({ id, todo, completed: defaultCompleted }: Props) {
     <div className="flex items-center my-2">
       <button
         type="button"
-        className={`w-4 h-4 border-2 border-neutral-400 rounded-full transition-all duration-500 focus:outline-none ${
-          completed && "bg-neutral-400"
+        className={`w-4 h-4 border-2 rounded-full transition-all duration-500 focus:outline-none ${
+          completed
+            ? "bg-dark-red-orange border-dark-red-orange"
+            : "border-neutral-400"
         }`}
         onClick={toggleCompleted}
       ></button>
       <p
         className={`text-xl ml-2 transition-all duration-500 ${
-          completed ? "text-neutral-400 strike" : "text-neutral-600"
+          completed ? "text-dark-red-orange strike" : "text-neutral-600"
         }`}
         onClick={toggleCompleted}
       >

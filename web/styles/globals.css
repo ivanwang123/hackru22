@@ -41,14 +41,14 @@ body,
   width: 0px; /* Set a specific slider handle width */
   height: 0px; /* Slider handle height */
   cursor: ew-resize;
-  box-shadow: -300px 0 0 300px #04aa6d;
+  box-shadow: -300px 0 0 300px #38bdf8;
 }
 
 .slider::-moz-range-thumb {
   width: 0px; /* Set a specific slider handle width */
   height: 0px; /* Slider handle height */
   cursor: ew-resize;
-  box-shadow: -80px 0 0 80px #04aa6d;
+  box-shadow: -80px 0 0 80px #38bdf8;
 }
 
 /* input[type="range"]::-webkit-slider-runnable-track {

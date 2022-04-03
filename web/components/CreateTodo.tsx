@@ -41,7 +41,7 @@ function CreateTodo({ setTodos }: Props) {
   return (
     <input
       type="text"
-      className="text-xl rounded px-4 py-1 focus:outline-none"
+      className="text-xl bg-tan rounded px-4 py-1 focus:outline-none"
       placeholder="What to do..."
       value={value}
       onChange={(e) => setValue(e.target.value)}

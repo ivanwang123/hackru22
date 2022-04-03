@@ -9,6 +9,7 @@ module.exports = {
         "red-orange": "#e79675",
         "dark-red-orange": "#e37a80",
         background: "#AFEBC8",
+        tan: "#CEF7DE",
       },
     },
   },
