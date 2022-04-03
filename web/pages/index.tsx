@@ -1,4 +1,3 @@
-import { GetServerSideProps } from "next";
 import SliderList from "../components/SliderList";
 import Layout from "../components/Layout";
 
@@ -8,11 +7,14 @@ function Home({ goals }: any) {
     <Layout>
       <main className="grid grid-cols-3">
         <section className="p-6">
+          <img src="Title.PNG" />
           <SliderList />
         </section>
         <section className="p-6">
-          <h1>WellBean</h1>
-          <img src="Happy.GIF" alt="happy bean" />
+          <div className="mt-24">
+            <img src="Happy.GIF" alt="happy bean" />
+          </div>
+          <div></div>
         </section>
         <section className="p-6">
           <h2>TODO</h2>
