@@ -22,12 +22,13 @@ function Register() {
             email: email,
             name: name,
             password: password,
+            emotion: "Happy",
           }),
         });
         const user = await userRes.json();
-        console.log("USER", user);
         localStorage.setItem("userId", user.id);
         localStorage.setItem("username", user.name);
+        localStorage.setItem("emotion", user.emotion);
         router.push("/");
       } catch (e) {
         console.error("ERROR", e);

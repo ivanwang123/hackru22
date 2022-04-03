@@ -24,9 +24,9 @@ function Login() {
         });
         const user = await userRes.json();
         if (user) {
-          console.log("USER", user, user.id, user.name);
           localStorage.setItem("userId", user.id);
           localStorage.setItem("username", user.name);
+          localStorage.setItem("emotion", user.emotion);
           router.push("/");
         }
       } catch (e) {

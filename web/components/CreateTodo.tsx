@@ -23,7 +23,6 @@ function CreateTodo({ setTodos }: Props) {
           }),
         });
         const todo = await todoRes.json();
-        console.log("TODO", todo);
         setTodos((todos: any[]) => [...todos, todo]);
         setValue("");
       } catch (e) {

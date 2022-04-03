@@ -33,6 +33,7 @@ model users {
   email    String  @db.VarChar(256)
   password String  @db.VarChar(256)
   name     String  @db.VarChar(256)
+  emotion  String  @db.VarChar(256)
   goals    goals[]
   todos    todos[]
 }

@@ -3,17 +3,17 @@ import Layout from "../components/Layout";
 import TodoList from "../components/TodoList";
 import { useState, useEffect } from "react";
 
-function Home({ goals }: any) {
+function Home() {
   const [mood, setMood] = useState<string>("Happy.GIF");
   const [name, setName] = useState<string>("");
 
   useEffect(() => {
-    console.log("USERNAME", localStorage.getItem("username"));
     setName(localStorage.getItem("username") || "");
+
+    onMoodClick(null, localStorage.getItem("emotion") || "");
   }, []);
 
-  const onMoodClick = (e: any, m: string) => {
-    console.log(m);
+  const onMoodClick = async (e: any, m: string) => {
     switch (m) {
       case "Happy":
         setMood("Happy.GIF");
@@ -37,10 +37,22 @@ function Home({ goals }: any) {
         setMood("Happy.GIF");
         break;
     }
-    console.log(mood);
+    localStorage.setItem("emotion", m);
+    await fetch(
+      `http://localhost:8080/user/update/${localStorage.getItem("userId")}`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          emotion: m,
+        }),
+      }
+    );
   };
 
-  console.log("GOALS", goals);
   return (
     <Layout>
       <main className="grid grid-cols-3">
@@ -60,12 +72,13 @@ function Home({ goals }: any) {
             <div className="flex space-x-10 text-xs text-gray-400">
               <div
                 onClick={(e) => onMoodClick(e, "Happy")}
-                className="cursor-pointer"
+                className="flex flex-col items-center cursor-pointer"
               >
                 <img className="h-10" src="Bean-Happy.PNG"></img>
                 <p
-                  className={`mt-0.5 ${
-                    mood === "Happy.GIF" && "font-bold text-dark-red-orange"
+                  className={`mt-0.5 px-1.5 py-0.5 ${
+                    mood === "Happy.GIF" &&
+                    "bg-dark-red-orange rounded-full text-white"
                   }`}
                 >
                   Happy
@@ -73,12 +86,13 @@ function Home({ goals }: any) {
               </div>
               <div
                 onClick={(e) => onMoodClick(e, "Tired")}
-                className="cursor-pointer"
+                className="flex flex-col items-center cursor-pointer"
               >
                 <img className="h-10" src="Bean-Tired.PNG"></img>
                 <p
-                  className={`mt-0.5 ${
-                    mood === "Tired.GIF" && "font-bold text-dark-red-orange"
+                  className={`mt-0.5 px-1.5 py-0.5 ${
+                    mood === "Tired.GIF" &&
+                    "bg-dark-red-orange rounded-full text-white"
                   }`}
                 >
                   Tired
@@ -86,12 +100,13 @@ function Home({ goals }: any) {
               </div>
               <div
                 onClick={(e) => onMoodClick(e, "Stressed")}
-                className="cursor-pointer"
+                className="flex flex-col items-center cursor-pointer"
               >
                 <img className="h-10" src="Bean-Stressed.PNG"></img>
                 <p
-                  className={`mt-0.5 ${
-                    mood === "Stressed.GIF" && "font-bold text-dark-red-orange"
+                  className={`mt-0.5 px-1.5 py-0.5 ${
+                    mood === "Stressed.GIF" &&
+                    "bg-dark-red-orange rounded-full text-white"
                   }`}
                 >
                   Stressed
@@ -99,12 +114,13 @@ function Home({ goals }: any) {
               </div>
               <div
                 onClick={(e) => onMoodClick(e, "Sleepy")}
-                className="cursor-pointer"
+                className="flex flex-col items-center cursor-pointer"
               >
                 <img className="h-10" src="Bean-Sleepy.PNG"></img>
                 <p
-                  className={`mt-0.5 ${
-                    mood === "Sleepy.GIF" && "font-bold text-dark-red-orange"
+                  className={`mt-0.5 px-1.5 py-0.5 ${
+                    mood === "Sleepy.GIF" &&
+                    "bg-dark-red-orange rounded-full text-white"
                   }`}
                 >
                   Sleepy
@@ -112,12 +128,13 @@ function Home({ goals }: any) {
               </div>
               <div
                 onClick={(e) => onMoodClick(e, "Angry")}
-                className="cursor-pointer"
+                className="flex flex-col items-center cursor-pointer"
               >
                 <img className="h-10" src="Bean-Angry.PNG"></img>
                 <p
-                  className={`mt-0.5 ${
-                    mood === "Angry.GIF" && "font-bold text-dark-red-orange"
+                  className={`mt-0.5 px-1.5 py-0.5 ${
+                    mood === "Angry.GIF" &&
+                    "bg-dark-red-orange rounded-full text-white"
                   }`}
                 >
                   Angry
@@ -125,12 +142,13 @@ function Home({ goals }: any) {
               </div>
               <div
                 onClick={(e) => onMoodClick(e, "Excited")}
-                className="cursor-pointer"
+                className="flex flex-col items-center cursor-pointer"
               >
                 <img className="h-10" src="Bean-Excited.PNG"></img>
                 <p
-                  className={`mt-0.5 ${
-                    mood === "Excited.GIF" && "font-bold text-dark-red-orange"
+                  className={`mt-0.5 px-1.5 py-0.5 ${
+                    mood === "Excited.GIF" &&
+                    "bg-dark-red-orange rounded-full text-white"
                   }`}
                 >
                   Excited

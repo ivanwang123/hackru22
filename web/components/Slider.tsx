@@ -2,9 +2,10 @@ type Props = {
   range: number;
   value: number;
   onChange: any;
+  handleUpdate: any;
 };
 
-function Slider({ range, value, onChange }: Props) {
+function Slider({ range, value, onChange, handleUpdate }: Props) {
   return (
     <input
       type="range"
@@ -12,6 +13,8 @@ function Slider({ range, value, onChange }: Props) {
       max={range}
       defaultValue={value}
       onChange={onChange}
+      onMouseUp={handleUpdate}
+      onTouchEnd={handleUpdate}
       className="slider bg-green-100"
     />
   );

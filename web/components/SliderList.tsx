@@ -19,6 +19,7 @@ function SliderList() {
     <div className="grid grid-flow-row gap-4">
       {goals.map((goal) => (
         <SliderWrapper
+          id={goal.id}
           title={goal.title}
           range={goal.range}
           value={goal.value}

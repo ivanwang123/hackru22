@@ -28,7 +28,6 @@ function CreateSlider({ setGoals }: Props) {
           }),
         });
         const goal = await goalRes.json();
-        console.log("GOAL", goal);
         setGoals((goals: any[]) => [...goals, goal]);
         setTitle("");
         setRange("1");
@@ -66,9 +65,9 @@ function CreateSlider({ setGoals }: Props) {
             <input
               type="text"
               className="w-full px-4 py-1 rounded-full mb-5 focus:outline-none"
-              // placeholder="Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              autoFocus
             ></input>
             <label htmlFor="goal" className="text-neutral-500 font-bold">
               Goal

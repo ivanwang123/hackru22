@@ -43,7 +43,6 @@ const main = async () => {
         ...req.body,
       },
     });
-    console.log("USER", user);
     res.send(JSON.stringify(user));
   });
 
@@ -145,6 +144,5 @@ main()
     throw e;
   })
   .finally(async () => {
-    console.log("DISCONNECTING PRISMA");
     await prisma.$disconnect();
   });
