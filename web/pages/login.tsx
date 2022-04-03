@@ -1,7 +1,10 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
+import { useRouter } from "next/router";
 
 function Login() {
+  const router = useRouter();
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -20,9 +23,11 @@ function Login() {
           }),
         });
         const user = await userRes.json();
-        console.log("USER", user);
         if (user) {
+          console.log("USER", user, user.id, user.name);
           localStorage.setItem("userId", user.id);
+          localStorage.setItem("username", user.name);
+          router.push("/");
         }
       } catch (e) {
         console.error("ERROR", e);
@@ -32,25 +37,35 @@ function Login() {
 
   return (
     <Layout title="Login | WELLBEAN">
-      <div className="flex flex-col">
-        <h1>Login</h1>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit" onClick={handleLogin}>
-          Log in
-        </button>
+      <div className="h-full grid place-items-center">
+        <div className="w-72">
+          <h1 className="text-neutral-500 text-2xl font-bold mb-8">Login</h1>
+          <label htmlFor="email" className="text-neutral-500 font-bold">
+            Email
+          </label>
+          <input
+            type="email"
+            className="w-full px-4 py-1 mb-5 rounded-full focus:outline-none"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label htmlFor="password" className="text-neutral-500 font-bold">
+            Password
+          </label>
+          <input
+            type="password"
+            className="w-full px-4 py-1 rounded-full focus:outline-none"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            type="submit"
+            className="btn btn-red btn-red:hover mt-10"
+            onClick={handleLogin}
+          >
+            Log in
+          </button>
+        </div>
       </div>
     </Layout>
   );

@@ -30,6 +30,8 @@ function CreateSlider({ setGoals }: Props) {
         const goal = await goalRes.json();
         console.log("GOAL", goal);
         setGoals((goals: any[]) => [...goals, goal]);
+        setTitle("");
+        setRange("1");
       } catch (e) {
         console.error("ERROR", e);
       }
@@ -41,7 +43,7 @@ function CreateSlider({ setGoals }: Props) {
     <>
       <button
         type="button"
-        className="btn btn-red btn-red:hover"
+        className="btn btn-red btn-red:hover mt-5"
         onClick={() => setOpen(true)}
       >
         + Create Health Goal
@@ -52,32 +54,37 @@ function CreateSlider({ setGoals }: Props) {
           onClick={() => setOpen(false)}
         >
           <div
-            className="w-96 h-96 bg-white p-4 rounded-xl"
+            className="w-96 bg-background p-8 rounded-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <h1>Create goal</h1>
-            <label htmlFor="title" className="ml-2">
+            <h1 className="text-neutral-500 text-xl font-bold mb-4">
+              Create goal
+            </h1>
+            <label htmlFor="title" className="text-neutral-500 font-bold">
               Title
             </label>
             <input
               type="text"
-              className="w-full border px-2 focus:outline-none"
-              placeholder="Title"
+              className="w-full px-4 py-1 rounded-full mb-5 focus:outline-none"
+              // placeholder="Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             ></input>
-            <label htmlFor="goal" className="ml-2">
+            <label htmlFor="goal" className="text-neutral-500 font-bold">
               Goal
             </label>
             <input
               type="number"
-              className="w-full border px-2 focus:outline-none"
-              placeholder="Goal"
+              className="w-full px-4 py-1 rounded-full focus:outline-none"
               value={range}
               onChange={(e) => setRange(e.target.value)}
               min={0}
             ></input>
-            <button type="submit" onClick={handleSubmit}>
+            <button
+              type="submit"
+              className="btn btn-red btn-red:hover mt-10"
+              onClick={handleSubmit}
+            >
               Create
             </button>
           </div>

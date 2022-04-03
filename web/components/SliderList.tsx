@@ -22,6 +22,7 @@ function SliderList() {
           title={goal.title}
           range={goal.range}
           value={goal.value}
+          key={goal.id}
         />
       ))}
       <CreateSlider setGoals={setGoals} />

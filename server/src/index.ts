@@ -25,6 +25,8 @@ const main = async () => {
     res.send(JSON.stringify("Hello world!"));
   });
 
+  // USER
+
   app.post("/user", async (req, res) => {
     const user = await prisma.users.findFirst({
       where: {
@@ -56,6 +58,8 @@ const main = async () => {
     });
   });
 
+  // GOALS
+
   app.get("/goals/:userId", async (req, res) => {
     const goals = await prisma.goals.findMany({
       where: {
@@ -84,6 +88,48 @@ const main = async () => {
       },
       data: {
         ...req.body,
+      },
+    });
+  });
+
+  // TODOS
+
+  app.get("/todos/:userId", async (req, res) => {
+    const todos = await prisma.todos.findMany({
+      where: {
+        user_id: req.params.userId,
+      },
+      orderBy: {
+        created_at: "asc",
+      },
+    });
+    res.send(JSON.stringify(todos));
+  });
+
+  app.post("/todos/create", async (req, res) => {
+    const todo = await prisma.todos.create({
+      data: {
+        ...req.body,
+      },
+    });
+    res.send(JSON.stringify(todo));
+  });
+
+  app.post("/todos/update/:id", async (req, _res) => {
+    await prisma.todos.update({
+      where: {
+        id: req.params.id,
+      },
+      data: {
+        ...req.body,
+      },
+    });
+  });
+
+  app.post("/todos/delete/:id", async (req, _res) => {
+    await prisma.todos.delete({
+      where: {
+        id: req.params.id,
       },
     });
   });
